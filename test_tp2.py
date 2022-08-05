@@ -124,7 +124,7 @@ def css_correction_sleep():
     driver.quit()
 
 
-def test_css_correction_implicit_wait():
+def css_correction_implicit_wait():
     logging.basicConfig(filename="essai.log",level=logging.WARNING)
     driver = webdriver.Chrome()
     driver.implicitly_wait(10)
