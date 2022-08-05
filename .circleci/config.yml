@@ -29,6 +29,9 @@ jobs:
           name: "Run tests"
           command: python3 -m pytest
 
+      - store_test_results:
+          path: /home/circleci
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
