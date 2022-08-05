@@ -20,7 +20,7 @@ def testPageObject():
     home.openPatesRizFeculents()
     home.openPatesCategoryPage()
     driver.get_screenshot_as_file(
-        "C:\\Users\\ib\\PycharmProjects\\A4Q\\TP4_PageObject\\screenshots\\productCategaoryPage" + time.strftime(
+        "C:\\Users\\ib\\PycharmProjects\\A4Q\\TP4_PageObject\\screenshots\\productCategoryPage" + time.strftime(
             "%Y%m%d-%H%M%S") + ".png")
 
     productCat.openProductsPage(3)

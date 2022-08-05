@@ -55,12 +55,12 @@ def test_carrefour():
 
     # hover to feculent
     feculent = wait.until(expected_conditions.visibility_of_element_located(
-        (By.CSS_SELECTOR, "#data-menu-level-1_R12 > li:nth-child(7)")))
+        (By.CSS_SELECTOR, "#data-menu-level-1_R13 > li:nth-child(7)")))
     action.move_to_element(feculent)
     action.perform()
 
     # clic on pate
-    pates = driver.find_element(By.CSS_SELECTOR, "#data-menu-level-2_R12F05 > li:nth-child(3)")
+    pates = driver.find_element(By.CSS_SELECTOR, "#data-menu-level-2_R13F05 > li:nth-child(3)")
     pates.click()
 
     # Call function to open product

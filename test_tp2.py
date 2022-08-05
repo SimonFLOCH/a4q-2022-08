@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 
-def test_xpath():
+def xpath():
     driver = webdriver.Chrome()
     driver.maximize_window()
     driver.get("https://www.carrefour.fr")
@@ -28,7 +28,7 @@ def test_xpath():
     time.sleep(2)
     buy_button = driver.find_element(By.XPATH, "//button[contains(@class, 'pl-button--primary add-to-cart__plus')]")
     buy_button.click()
-    time.sleep(2)
+    time.sleep(5)
     drive = driver.find_element(By.XPATH, "//div[contains(@class,'push-services--pickers')]/ul/li[1]//div[contains(@class,'ds-body-text')]")
     delivery24 = driver.find_element(By.XPATH,
                                      "//div[contains(@class,'push-services--pickers')]/ul/li[2]//div[contains(@class,'ds-body-text')]")
@@ -175,7 +175,7 @@ def test_css_correction_explicit_wait():
     driver.maximize_window()
     driver.get("https://www.carrefour.fr")
 
-    wait = WebDriverWait(driver, 10)
+    wait = WebDriverWait(driver, 20)
 
     close_cookies = wait.until(expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, ".banner-actions-container > button")))
     close_cookies.click()

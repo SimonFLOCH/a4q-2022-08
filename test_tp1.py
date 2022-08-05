@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 
-def test_open_chrome():
+def open_chrome():
     driver = webdriver.Chrome()
     driver.maximize_window()
     driver.get("https://www.amazon.fr")

@@ -14,10 +14,10 @@ class HomePage:
     hamburgerButtonSelector = (By.ID, "data-rayons")
     mainMenuSelector = (By.ID, "data-menu-level-0")
     epicerieSaleeSelector = (By.CSS_SELECTOR, ".nav-item__menu-link [alt='Epicerie salée']")
-    sideMenuSelector = (By.ID, "data-menu-level-1_R12")
-    patesRizFeculentsSelector = (By.CSS_SELECTOR, "#data-menu-level-1_R12 > li:nth-child(7)")
-    lastMenuSelector = (By.ID, "data-menu-level-2_R12F05")
-    patesSelector = (By.CSS_SELECTOR, "#data-menu-level-2_R12F05 > li:nth-child(3)")
+    sideMenuSelector = (By.ID, "data-menu-level-1_R13")
+    patesRizFeculentsSelector = (By.CSS_SELECTOR, "#data-menu-level-1_R13 > li:nth-child(7)")
+    lastMenuSelector = (By.ID, "data-menu-level-2_R13F05")
+    patesSelector = (By.CSS_SELECTOR, "#data-menu-level-2_R13F05 > li:nth-child(3)")
     loadPageSelector = (By.CSS_SELECTOR, "div.facet-toolbar__sort-button")
 
     def __init__(self, driver: webdriver.Chrome):
