@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 
-def test_xpath():
+def xpath():
     driver = webdriver.Chrome()
     driver.maximize_window()
     driver.get("https://www.carrefour.fr")
