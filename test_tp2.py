@@ -44,7 +44,7 @@ def xpath():
     # time.sleep(10)
     driver.quit()
 
-def test_css():
+def css():
     driver = webdriver.Chrome()
     driver.maximize_window()
     driver.get("https://www.carrefour.fr")
@@ -75,7 +75,7 @@ def test_css():
     driver.quit()
 
 
-def test_css_correction_sleep():
+def css_correction_sleep():
     logging.basicConfig(filename="essai.log",level=logging.WARNING)
     driver = webdriver.Chrome()
     driver.maximize_window()
