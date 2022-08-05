@@ -30,7 +30,7 @@ jobs:
           command: python3 -m pytest
 
       - store_test_results:
-          path: /home/circleci
+          path: /home/A4Q/test-results
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
