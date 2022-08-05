@@ -175,7 +175,7 @@ def test_css_correction_explicit_wait():
     driver.maximize_window()
     driver.get("https://www.carrefour.fr")
 
-    wait = WebDriverWait(driver, 10)
+    wait = WebDriverWait(driver, 20)
 
     close_cookies = wait.until(expected_conditions.element_to_be_clickable((By.CSS_SELECTOR, ".banner-actions-container > button")))
     close_cookies.click()
