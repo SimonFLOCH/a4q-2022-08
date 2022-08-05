@@ -28,7 +28,7 @@ def test_xpath():
     time.sleep(2)
     buy_button = driver.find_element(By.XPATH, "//button[contains(@class, 'pl-button--primary add-to-cart__plus')]")
     buy_button.click()
-    time.sleep(2)
+    time.sleep(5)
     drive = driver.find_element(By.XPATH, "//div[contains(@class,'push-services--pickers')]/ul/li[1]//div[contains(@class,'ds-body-text')]")
     delivery24 = driver.find_element(By.XPATH,
                                      "//div[contains(@class,'push-services--pickers')]/ul/li[2]//div[contains(@class,'ds-body-text')]")
