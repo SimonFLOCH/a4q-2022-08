@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
-def test_login_opencruise():
+def login_opencruise():
     driver = webdriver.Chrome()
     driver.maximize_window()
     driver.get("http://opencruise-ok.sogeti-center.cloud")
