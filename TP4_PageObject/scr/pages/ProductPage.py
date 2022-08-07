@@ -39,11 +39,15 @@ class ProductPage:
         self.wait.until(expected_conditions.element_to_be_clickable(self.chooseStoreButtonSelector))
 
 
-    def selectStore(self):
+    def selectStore(self, dir):
         firstStore = self.driver.find_element(By.CSS_SELECTOR, ".drive-service-list__list > li:nth-child(1) button")
         firstStore.click()
         self.wait.until(expected_conditions.visibility_of_element_located(self.textStatusSelector))
-
+        scshEle = self.driver.find_element(By.ID, "modal-relative")
+        self.driver.get_screenshot_as_file(dir + "\\unavailableProduct" + time.strftime("%Y%m%d-%H%M%S") + ".png")
+        scshEle.screenshot(dir + "\\unavailableProductFrame" + time.strftime("%Y%m%d-%H%M%S") + ".png")
 
     def getAvailabilityStatus(self):
         return self.driver.find_element(By.CSS_SELECTOR, "div.ds-body-text--color-inherit").text
+
+

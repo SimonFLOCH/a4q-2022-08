@@ -27,7 +27,7 @@ def openProducts2(driver, index):
         print("Index value is out of range. Should be between 0 and 59")
 
 
-def test_carrefour():
+def carrefour():
 
     # Open browser and go to Web page
     driver = webdriver.Chrome()

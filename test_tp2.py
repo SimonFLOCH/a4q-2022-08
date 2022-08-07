@@ -168,7 +168,7 @@ def css_correction_implicit_wait():
 
 
 
-def test_css_correction_explicit_wait():
+def css_correction_explicit_wait():
     logging.basicConfig(filename="essai.log",level=logging.WARNING)
     driver = webdriver.Chrome()
 

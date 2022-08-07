@@ -14,11 +14,12 @@ class ProductCategoryPage:
         self.wait = WebDriverWait(driver, 20)
 
 
-    def openProductsPage(self, index):
+    def openProductsPage(self, index, dir):
         # Function to open product by list
         if index >= 0 and index < 60:
             selectProduct = self.wait.until(expected_conditions.visibility_of_all_elements_located(self.selectProductSelector))
             selectProduct[index].click()
             self.wait.until(expected_conditions.visibility_of_element_located(self.loadProductPageSelector))
+            self.driver.get_screenshot_as_file(dir + "\\productPage" + time.strftime("%Y%m%d-%H%M%S") + ".png")
         else:
             print("Index value is out of range. Should be between 0 and 59")

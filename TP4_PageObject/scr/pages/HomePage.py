@@ -55,7 +55,8 @@ class HomePage:
         self.wait.until(expected_conditions.visibility_of_element_located(self.lastMenuSelector))
 
 
-    def openPatesCategoryPage(self):
+    def openPatesCategoryPage(self, dir):
         pates = self.wait.until(expected_conditions.element_to_be_clickable(self.patesSelector))
         pates.click()
         self.wait.until(expected_conditions.visibility_of_element_located(self.loadPageSelector))
+        self.driver.get_screenshot_as_file(dir + "\\productCategoryPage" + time.strftime("%Y%m%d-%H%M%S") + ".png")

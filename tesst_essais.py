@@ -1,7 +1,7 @@
 from selenium import webdriver
 
 
-def test_essai():
+def essai():
     driver = webdriver.Chrome()
     driver.get("https://python.org")
     driver.execute_script("window.open()")
