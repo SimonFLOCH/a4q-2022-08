@@ -8,6 +8,7 @@ from datetime import datetime
 
 
 def testPageObject():
+    # création d'un dossier horodaté pour stocker mes screenshots
     run_dir = "C:\\Users\\ib\\PycharmProjects\\A4Q\\TP4_PageObject\\screenshots\\screenshots" + datetime.now().strftime(
         "%Y%m%d-%H%M%S")
     os.mkdir(run_dir)
@@ -24,6 +25,7 @@ def testPageObject():
     home.openMenu()
     home.openEpicerieSalee()
     home.openPatesRizFeculents()
+    # appel d'une fonction possedant un screenshot avec le paramètre run_dir défini précédement
     home.openPatesCategoryPage(run_dir)
 
 
