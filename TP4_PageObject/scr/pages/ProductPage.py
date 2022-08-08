@@ -4,6 +4,8 @@ from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
+from TP4_PageObject.scr.wrapper.UsefullWrapper import Wrapper
+
 
 
 class ProductPage:
@@ -14,34 +16,29 @@ class ProductPage:
     textStatusSelector = (By.CSS_SELECTOR, "div.ds-body-text--color-inherit")
 
 
+
     def __init__(self, driver: webdriver.Chrome):
         self.driver = driver
         self.wait = WebDriverWait(driver, 20)
-
+        self.wrapper = Wrapper(driver)
 
     def buy(self):
-        buyButton = self.driver.find_element(By.ID, "data-produit-acheter")
-        buyButton.click()
+        self.wrapper.clickOnElementAfterWait(self.buyButtonSelector)
         self.wait.until(expected_conditions.element_to_be_clickable(self.driveButtonSelector))
 
 
     def chooseDriveMethod(self):
-        pickUp = self.driver.find_element(By.CSS_SELECTOR, ".push-services--pickers li:nth-child(1)")
-        pickUp.click()
+        self.wrapper.clickOnElementAfterWait(self.driveButtonSelector)
         self.wait.until(expected_conditions.visibility_of_element_located(self.zipCodeTextBarSelector))
 
 
     def enterZipCode(self):
-        zipCode = self.driver.find_element(By.CSS_SELECTOR, "[data-cs-mask=true]")
-        zipCode.send_keys("75001")
-        time.sleep(1)
-        zipCode.send_keys(Keys.ENTER)
+        self.wrapper.writeIntoBoxWithEnterAfterWait(self.zipCodeTextBarSelector, 75001)
         self.wait.until(expected_conditions.element_to_be_clickable(self.chooseStoreButtonSelector))
 
 
     def selectStore(self, dir):
-        firstStore = self.driver.find_element(By.CSS_SELECTOR, ".drive-service-list__list > li:nth-child(1) button")
-        firstStore.click()
+        self.wrapper.clickOnElementAfterWait(self.chooseStoreButtonSelector)
         self.wait.until(expected_conditions.visibility_of_element_located(self.textStatusSelector))
         scshEle = self.driver.find_element(By.ID, "modal-relative")
         self.driver.get_screenshot_as_file(dir + "\\unavailableProduct" + time.strftime("%Y%m%d-%H%M%S") + ".png")

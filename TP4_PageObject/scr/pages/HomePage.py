@@ -4,8 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.common.action_chains import ActionChains
-
+from TP4_PageObject.scr.wrapper.UsefullWrapper import Wrapper
 
 
 
@@ -23,40 +22,30 @@ class HomePage:
     def __init__(self, driver: webdriver.Chrome):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
-        self.action = ActionChains(driver)
+        self.wrapper = Wrapper(driver)
 
 
     def closeCookie(self):
-        closeCookiesButton = self.wait.until(expected_conditions.element_to_be_clickable(
-            self.closeCookieButtonSelector))
-        closeCookiesButton.click()
+        self.wrapper.clickOnElementAfterWait(self.closeCookieButtonSelector)
         self.wait.until(expected_conditions.invisibility_of_element_located(self.closeCookieButtonSelector))
 
 
     def openMenu(self):
-        hamburgerButton = self.wait.until(expected_conditions.element_to_be_clickable(self.hamburgerButtonSelector))
-        hamburgerButton.click()
+        self.wrapper.clickOnElementAfterWait(self.hamburgerButtonSelector)
         self.wait.until(expected_conditions.visibility_of_element_located(self.mainMenuSelector))
 
 
     def openEpicerieSalee(self):
-        epicerieSalee = self.wait.until(expected_conditions.visibility_of_element_located(
-            self.epicerieSaleeSelector))
-        self.action.move_to_element(epicerieSalee)
-        self.action.perform()
+        self.wrapper.hoverElementAfterWait(self.epicerieSaleeSelector)
         self.wait.until(expected_conditions.visibility_of_element_located(self.sideMenuSelector))
 
 
     def openPatesRizFeculents(self):
-        feculent = self.wait.until(expected_conditions.visibility_of_element_located(
-            self.patesRizFeculentsSelector))
-        self.action.move_to_element(feculent)
-        self.action.perform()
+        self.wrapper.hoverElementAfterWait(self.patesRizFeculentsSelector)
         self.wait.until(expected_conditions.visibility_of_element_located(self.lastMenuSelector))
 
 
     def openPatesCategoryPage(self, dir):
-        pates = self.wait.until(expected_conditions.element_to_be_clickable(self.patesSelector))
-        pates.click()
+        self.wrapper.clickOnElementAfterWait(self.patesSelector)
         self.wait.until(expected_conditions.visibility_of_element_located(self.loadPageSelector))
         self.driver.get_screenshot_as_file(dir + "\\productCategoryPage" + time.strftime("%Y%m%d-%H%M%S") + ".png")
