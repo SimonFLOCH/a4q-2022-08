@@ -1,8 +1,8 @@
-import time
 from selenium import webdriver
 from TP4_PageObject.scr.pages.HomePage import HomePage
 from TP4_PageObject.scr.pages.ProductCategoryPage import ProductCategoryPage
 from TP4_PageObject.scr.pages.ProductPage import ProductPage
+from TP4_PageObject.scr.pages.HeaderPage import HeaderComponent
 import os
 from datetime import datetime
 
@@ -20,13 +20,14 @@ def testPageObject():
     home = HomePage(driver)
     productCat = ProductCategoryPage(driver)
     product = ProductPage(driver)
+    header = HeaderComponent(driver)
 
     home.closeCookie()
-    home.openMenu()
-    home.openEpicerieSalee()
-    home.openPatesRizFeculents()
+    header.openMenu()
+    header.openEpicerieSalee()
+    header.openPatesRizFeculents()
     # appel d'une fonction possedant un screenshot avec le paramètre run_dir défini précédement
-    home.openPatesCategoryPage(run_dir)
+    header.openPatesCategoryPage(run_dir)
 
 
     productCat.openProductsPage(3, run_dir)

@@ -12,7 +12,8 @@ class Wrapper:
 
     def __init__(self,  driver: webdriver.Chrome):
         self.driver = driver
-        self.wait = WebDriverWait(driver, 20)
+        self.wait = WebDriverWait(driver, 0)
+        self.wait2 = WebDriverWait(driver, 10)
         self.action = ActionChains(driver)
 
     def clickOnElementAfterWait(self, locator):
@@ -36,6 +37,14 @@ class Wrapper:
         ele.send_keys(Keys.ENTER)
 
     def hoverElementAfterWait(self, locator):
-        ele = self.wait.until(expected_conditions.visibility_of_element_located(locator))
+        ele = self.wait2.until(expected_conditions.visibility_of_element_located(locator))
         self.action.move_to_element(ele)
         self.action.perform()
+
+    def writeIntoBox(self, locator, text):
+        ele = self.driver.find_element(locator)
+        ele.send_keys(text)
+
+    def validateTextBoxWithEnter(self, locator):
+        ele = self.driver.find_element(locator)
+        ele.send_keys(Keys.ENTER)
