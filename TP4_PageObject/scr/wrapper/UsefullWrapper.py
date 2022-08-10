@@ -12,7 +12,7 @@ class Wrapper:
 
     def __init__(self,  driver: webdriver.Chrome):
         self.driver = driver
-        self.wait = WebDriverWait(driver, 0)
+        self.wait = WebDriverWait(driver, 2)
         self.wait2 = WebDriverWait(driver, 10)
         self.action = ActionChains(driver)
 
