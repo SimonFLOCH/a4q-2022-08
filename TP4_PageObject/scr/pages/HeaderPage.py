@@ -14,17 +14,22 @@ class HeaderComponent:
     headerFoodSelector = (By.ID, "header-tab-food")
     validationHeaderFoodSelector = (By.CSS_SELECTOR, "#header-tab-food[checked]")
     mainMenuSelector = (By.ID, "data-menu-level-0")
-    epicerieSaleeSelector = (By.CSS_SELECTOR, ".nav-item__menu-link [alt='Epicerie salée']")
-    sideMenuSelector = (By.ID, "data-menu-level-1_R13")
-    patesRizFeculentsSelector = (By.CSS_SELECTOR, "#data-menu-level-1_R13 > li:nth-child(7)")
-    lastMenuSelector = (By.ID, "data-menu-level-2_R13F05")
-    patesSelector = (By.CSS_SELECTOR, "#data-menu-level-2_R13F05 > li:nth-child(3)")
+    # epicerieSaleeSelector = (By.CSS_SELECTOR, ".nav-item__menu-link [alt='Epicerie salée']")
+    # sideMenuSelector = (By.ID, "data-menu-level-1_R13")
+    # patesRizFeculentsSelector = (By.CSS_SELECTOR, "#data-menu-level-1_R13 > li:nth-child(7)")
+    # lastMenuSelector = (By.ID, "data-menu-level-2_R13F05")
+    # patesSelector = (By.CSS_SELECTOR, "#data-menu-level-2_R13F05 > li:nth-child(3)")
     loadPageSelector = (By.CSS_SELECTOR, "div.facet-toolbar__sort-button")
     headerNonFoodSelector = (By.ID, "header-tab-non-food")
     validationHeaderNonFoodSelector = (By.CSS_SELECTOR, "#header-tab-non-food[checked]")
     hamburgerButtonSelector = (By.ID, "data-rayons")
     mainMenuListSelector = (By.CSS_SELECTOR, "#data-menu-level-0 > li")
-    subMenuListSelector = (By.CSS_SELECTOR, "")
+    subMenuEpicerieSaleeSelector = (By.CSS_SELECTOR, "#data-menu-level-0 > li:nth-child(12) > ul")
+    subMenuListEpicerieSaleeSelector = (By.CSS_SELECTOR, "#data-menu-level-0 > li:nth-child(12) > ul > li")
+    categoryMenuFeculentSelector = (
+        By.CSS_SELECTOR, "#data-menu-level-0 > li:nth-child(12) > ul > li:nth-child(7) > ul")
+    categoryMenuListFeculentSelector = (
+        By.CSS_SELECTOR, "#data-menu-level-0 > li:nth-child(12) > ul > li:nth-child(7) > ul > li")
     promotionButtonSelector = (By.ID, "data-promotions")
     catalogueButtonSelector = (By.ID, "data-catalogues")
     momentButtonSelector = (By.ID, "data-moment")
@@ -65,37 +70,54 @@ class HeaderComponent:
         self.wrapper.clickOnElementAfterWait(self.hamburgerButtonSelector)
         self.wait.until(expected_conditions.visibility_of_element_located(self.mainMenuListSelector))
 
-    def openEpicerieSalee(self):
-        self.wrapper.hoverElementAfterWait(self.epicerieSaleeSelector)
-        self.wait.until(expected_conditions.visibility_of_element_located(self.sideMenuSelector))
+    def navigationToProductCategory(self, mainIndex, subIndex, categoryIndex, dir):
 
+        if mainIndex>=0 and mainIndex<24:
+            mainMenuList = self.driver.find_elements(By.CSS_SELECTOR, "#data-menu-level-0 > li")
+            self.action.move_to_element(mainMenuList[mainIndex])
+            self.action.perform()
+            mainIndex += 1
+            mainIndex = str(mainIndex)
+        else:
+            print("mainIndex out of borders")
 
-    def openPatesRizFeculents(self):
-        self.wrapper.hoverElementAfterWait(self.patesRizFeculentsSelector)
-        self.wait.until(expected_conditions.visibility_of_element_located(self.lastMenuSelector))
+        self.wait.until(expected_conditions.visibility_of_element_located((
+            By.CSS_SELECTOR, "#data-menu-level-0 > li:nth-child("+ mainIndex +") > ul")))
 
+        subMenuList = self.driver.find_elements(
+            By.CSS_SELECTOR, "#data-menu-level-0 > li:nth-child("+ mainIndex +") > ul > li")
+        nbrOfItems = len(subMenuList)
 
-    def openPatesCategoryPage(self, dir):
-        self.wrapper.clickOnElementAfterWait(self.patesSelector)
-        self.wait.until(expected_conditions.visibility_of_element_located(self.loadPageSelector))
+        if subIndex>=0 and subIndex<nbrOfItems:
+            self.action.move_to_element(subMenuList[subIndex])
+            self.action.perform()
+            subIndex += 1
+            subIndex = str(subIndex)
+        else:
+            print("subIndex out of borders")
+
+        self.wait.until(expected_conditions.visibility_of_element_located((
+            By.CSS_SELECTOR,
+            "#data-menu-level-0 > li:nth-child("+ mainIndex +") > ul > li:nth-child("+ subIndex +") > ul")))
+
+        categoryMenuList = self.driver.find_elements(
+            By.CSS_SELECTOR,
+            "#data-menu-level-0 > li:nth-child("+ mainIndex +") > ul > li:nth-child("+ subIndex +") > ul > li")
+        nbrOfCategory = len(categoryMenuList)
+
+        if categoryIndex>=0 and categoryIndex<nbrOfCategory:
+            categoryIndex += 1
+            categoryIndex = str(categoryIndex)
+            chooseCategory = self.driver.find_element(By.CSS_SELECTOR,
+                "#data-menu-level-0 > "
+                "li:nth-child("+ mainIndex +") > ul > "
+                "li:nth-child("+ subIndex +") > ul > li:nth-child("+ categoryIndex +")")
+            chooseCategory.click()
+        else:
+            print("categoryIndex out of borders")
+
+        self.wait.until(expected_conditions.visibility_of_element_located((By.CLASS_NAME, "plp-banner__content")))
         self.driver.get_screenshot_as_file(dir + "\\productCategoryPage" + time.strftime("%Y%m%d-%H%M%S") + ".png")
-
-    # def navigationMainMenu(self, index):
-    #     if index>=0 and index<24:
-    #         mainMenuList = self.driver.find_elements(By.CSS_SELECTOR, "#data-menu-level-0 > li")
-    #         self.action.move_to_element(mainMenuList[index])
-    #         self.action.perform()
-    #         index += 1
-    #     else:
-    #         print("index hors limites")
-    #     self.wait.until(expected_conditions.visibility_of_element_located((
-    #         By.CSS_SELECTOR, "#data-menu-level-0 > li:nth-child("+ index +") > ul")))
-    #
-    #
-    # def navigationSubMenu(self, index):
-    #     count = self.wait.
-    #     nbrMax = len(count)
-    #     if index>=0 and index<nbrMax:
 
     def openPromotionPage(self):
         self.wrapper.clickOnElement(self.promotionButtonSelector)
@@ -146,3 +168,18 @@ class HeaderComponent:
     def clickOnHelpAndContact(self):
         self.wrapper.clickOnElement(self.helpAndContactSelector)
         self.wait.until(expected_conditions.visibility_of_element_located(self.helpPageSelector))
+
+    # def openEpicerieSalee(self):
+    #     self.wrapper.hoverElementAfterWait(self.epicerieSaleeSelector)
+    #     self.wait.until(expected_conditions.visibility_of_element_located(self.sideMenuSelector))
+    #
+    #
+    # def openPatesRizFeculents(self):
+    #     self.wrapper.hoverElementAfterWait(self.patesRizFeculentsSelector)
+    #     self.wait.until(expected_conditions.visibility_of_element_located(self.lastMenuSelector))
+    #
+    #
+    # def openPatesCategoryPage(self, dir):
+    #     self.wrapper.clickOnElementAfterWait(self.patesSelector)
+    #     self.wait.until(expected_conditions.visibility_of_element_located(self.loadPageSelector))
+    #     self.driver.get_screenshot_as_file(dir + "\\productCategoryPage" + time.strftime("%Y%m%d-%H%M%S") + ".png")
