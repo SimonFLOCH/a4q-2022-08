@@ -71,7 +71,7 @@ class HeaderComponent:
         self.wait.until(expected_conditions.visibility_of_element_located(self.mainMenuListSelector))
 
     def navigationToProductCategory(self, mainIndex, subIndex, categoryIndex, dir):
-
+        # survol du mainMenu jusqu'à l'élément voulu
         if mainIndex>=0 and mainIndex<24:
             mainMenuList = self.driver.find_elements(By.CSS_SELECTOR, "#data-menu-level-0 > li")
             self.action.move_to_element(mainMenuList[mainIndex])
@@ -81,13 +81,14 @@ class HeaderComponent:
         else:
             print("mainIndex out of borders")
 
+        # attente de l'apparition du subMenu
         self.wait.until(expected_conditions.visibility_of_element_located((
             By.CSS_SELECTOR, "#data-menu-level-0 > li:nth-child("+ mainIndex +") > ul")))
 
+        # survol du subMenu jusqu'à l'élément voulu
         subMenuList = self.driver.find_elements(
             By.CSS_SELECTOR, "#data-menu-level-0 > li:nth-child("+ mainIndex +") > ul > li")
         nbrOfItems = len(subMenuList)
-
         if subIndex>=0 and subIndex<nbrOfItems:
             self.action.move_to_element(subMenuList[subIndex])
             self.action.perform()
@@ -96,15 +97,16 @@ class HeaderComponent:
         else:
             print("subIndex out of borders")
 
+        # attente de l'apparition du categoryMenu
         self.wait.until(expected_conditions.visibility_of_element_located((
             By.CSS_SELECTOR,
             "#data-menu-level-0 > li:nth-child("+ mainIndex +") > ul > li:nth-child("+ subIndex +") > ul")))
 
+        # click sur l'élément voulu
         categoryMenuList = self.driver.find_elements(
             By.CSS_SELECTOR,
             "#data-menu-level-0 > li:nth-child("+ mainIndex +") > ul > li:nth-child("+ subIndex +") > ul > li")
         nbrOfCategory = len(categoryMenuList)
-
         if categoryIndex>=0 and categoryIndex<nbrOfCategory:
             categoryIndex += 1
             categoryIndex = str(categoryIndex)
@@ -116,6 +118,7 @@ class HeaderComponent:
         else:
             print("categoryIndex out of borders")
 
+        # attente du chargement de la page categoryProduct et screenshot
         self.wait.until(expected_conditions.visibility_of_element_located((By.CLASS_NAME, "plp-banner__content")))
         self.driver.get_screenshot_as_file(dir + "\\productCategoryPage" + time.strftime("%Y%m%d-%H%M%S") + ".png")
 
