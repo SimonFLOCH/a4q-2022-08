@@ -33,7 +33,6 @@ def testPageObject():
     product.chooseDriveMethod()
     product.enterZipCode()
     product.selectStore(run_dir)
-    #product.getAvailabilityStatus()
 
     assert product.getAvailabilityStatus() == "1 produit indisponible dans ce magasin."
 
