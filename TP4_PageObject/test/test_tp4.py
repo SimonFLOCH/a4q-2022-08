@@ -24,11 +24,7 @@ def testPageObject():
 
     home.closeCookie()
     header.openMenu()
-    header.openEpicerieSalee()
-    header.openPatesRizFeculents()
-    # appel d'une fonction possedant un screenshot avec le paramètre run_dir défini précédement
-    header.openPatesCategoryPage(run_dir)
-
+    header.navigationToProductCategory(11, 6, 2, run_dir)
 
     productCat.openProductsPage(3, run_dir)
 
