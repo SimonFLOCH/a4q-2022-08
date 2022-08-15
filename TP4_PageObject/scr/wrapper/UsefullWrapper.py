@@ -27,7 +27,7 @@ class Wrapper:
     def writeIntoBoxWithEnterAfterWait(self, locator, text):
         ele = self.wait.until(expected_conditions.visibility_of_element_located(locator))
         ele.send_keys(text)
-        time.sleep(1)
+        time.sleep(2)
         ele.send_keys(Keys.ENTER)
 
     def writeIntoBoxWithEnter(self, locator, text):
